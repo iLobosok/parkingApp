@@ -1,4 +1,27 @@
-/*Copyright 2020 Ahmet Burak Ozyurt
+/*
+MIT License
+
+Copyright (c) 2018 Liu Yanbo
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Copyright 2020 Ahmet Burak Ozyurt
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -17,8 +40,10 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
+import 'dart:ui';
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
@@ -144,48 +169,19 @@ class First extends State<FirstActivity> {
                               ),
                             ),
                           ),
-                       Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 50),
-                            child:SizedBox(
-                            width: 80,
-                            height: 30,
-                            child:StepperSwipe(
-                            initialValue:0,
-                            speedTransitionLimitCount: 3,
-                            firstIncrementDuration: Duration(milliseconds: 300),
-                            secondIncrementDuration: Duration(milliseconds: 100),
-                            direction: Axis.horizontal,
-                            dragButtonColor: Colors.blueAccent,
-                            withSpring: true,
-                            maxValue:59,
-                            minValue:1,
-                            withFastCount: true,
-                            stepperValue:widget.val,
-                            onChanged: (int val) => print('New value : $val'),
-                          ),),),
-                          Padding(
-                            padding: EdgeInsets.only(left: 50),
-                            child:SizedBox(
-                            width: 80,
-                            height: 30,
-                            child:StepperSwipe(
-                              initialValue:0,
-                              speedTransitionLimitCount: 3,
-                              firstIncrementDuration: Duration(milliseconds: 300),
-                              secondIncrementDuration: Duration(milliseconds: 100),
-                              direction: Axis.horizontal,
-                              dragButtonColor: Colors.blueAccent,
-                              withSpring: true,
-                              maxValue:59,
-                              minValue:1,
-                              withFastCount: true,
-                              stepperValue:widget.val,
-                              onChanged: (int val) => print('New value : $val'),
-                            ),),),
-                        ],)
+                          InkWell(
+                            onTap: () {
+                           DatePicker.showDatePicker(context,
+                           showTitleActions: true,
+                           minTime: DateTime(2021, 1, 30),
+                           maxTime: DateTime(2021, 12, 31), onChanged: (date) {
+                           print('change $date');
+                           }, onConfirm: (date) {
+                           print('confirm $date');
+                           }, currentTime: DateTime.now(), locale: LocaleType.en);
+                           },
+                          child:Icon(Icons.access_time_outlined, color:Colors.white)
+                          ),
                         ],
                       ),
                     ),
